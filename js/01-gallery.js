@@ -15,7 +15,7 @@ const element = galleryItems.map(galleryItem => {
     imgElm.classList.add('gallery__image');
     imgElm.src = galleryItem.preview;
     imgElm.setAttribute('data-source', galleryItem.original);
-    imgElm.alt = galleryItem.desciption;
+    imgElm.alt = galleryItem.description;
 
     itemElm.appendChild(linkElm);
     linkElm.appendChild(imgElm);

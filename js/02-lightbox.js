@@ -23,26 +23,18 @@ const element = galleryItems.map(galleryItem => {
 })
 ulEl.append(...element);
 
-console.dir(document.querySelectorAll('.gallery a'));
-
-const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250
-})
-
 ulEl.addEventListener('click', onClick);
 function onClick(evt) {
-    console.dir(evt);
     evt.preventDefault();
-
-    lightbox.open();
     document.addEventListener('keyup', onButtonClick);
 }
 function onButtonClick(evt) {
-    console.dir(evt.target);
     if (evt.key === "Escape") {
-        lightbox.close();
         document.removeEventListener("keyup", onButtonClick);
     }
 }
 
+new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250
+})

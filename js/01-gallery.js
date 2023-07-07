@@ -1,7 +1,5 @@
 import { galleryItems } from './gallery-items.js';
 
-console.log(galleryItems);
-
 const ulEl = document.querySelector('.gallery');
 const element = galleryItems.map(galleryItem => {
     const itemElm = document.createElement('li');
@@ -24,23 +22,28 @@ const element = galleryItems.map(galleryItem => {
 })
 ulEl.append(...element);
 
-let instance;
 ulEl.addEventListener('click', onClick);
+
+let instance;
+
 function onClick(evt) {
-    console.dir(evt.target.nodeName);
+    if (evt.target.nodeName !== "IMG") {
+        return;
+    }
     evt.preventDefault();
-    console.log(evt.target.dataset.source)
-    instance = basicLightbox.create(`
-    <img src="${evt.target.dataset.source}" width="800" height="600">
-`)
+
+    instance = basicLightbox.create(
+        `<img src="${evt.target.dataset.source}" width="800" height="600">`,
+        {
+            onShow: (instance) => { document.addEventListener('keyup', onButtonClick); },
+            onClose: (instance) => { document.removeEventListener("keyup", onButtonClick); }
+        });
     instance.show();
-    document.addEventListener('keyup', onButtonClick);
 }
+
 function onButtonClick(evt) {
-    console.dir(evt.target);
     if (evt.key === "Escape") {
         instance.close();
-        document.removeEventListener("keyup", onButtonClick);
     }
 }
 

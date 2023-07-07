@@ -1,7 +1,5 @@
 import { galleryItems } from './gallery-items.js';
 
-console.log(galleryItems);
-
 const ulEl = document.querySelector('.gallery');
 const element = galleryItems.map(galleryItem => {
     const itemElm = document.createElement('li');
@@ -22,17 +20,6 @@ const element = galleryItems.map(galleryItem => {
     return itemElm;
 })
 ulEl.append(...element);
-
-ulEl.addEventListener('click', onClick);
-function onClick(evt) {
-    evt.preventDefault();
-    document.addEventListener('keyup', onButtonClick);
-}
-function onButtonClick(evt) {
-    if (evt.key === "Escape") {
-        document.removeEventListener("keyup", onButtonClick);
-    }
-}
 
 new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
